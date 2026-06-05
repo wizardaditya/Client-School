@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --primary: #C8531A;
+    --secondary: #1A3A6B;
+    --accent: #D4A017;
+    --background: #FFFDF7;
+    --surface: #FFFFFF;
+    --text-dark: #1C1C1C;
+    --text-muted: #6B6B6B;
+    --success: #2D7A4F;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Noto Sans', system-ui, sans-serif;
+    background-color: #FFFDF7;
+    color: #1C1C1C;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-white px-6 py-3 rounded-lg font-semibold font-body transition-all duration-300 hover:bg-primary-dark hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary text-white px-6 py-3 rounded-lg font-semibold font-body transition-all duration-300 hover:bg-secondary-dark hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0;
+  }
+
+  .btn-outline {
+    @apply border-2 border-primary text-primary px-6 py-3 rounded-lg font-semibold font-body transition-all duration-300 hover:bg-primary hover:text-white hover:-translate-y-0.5;
+  }
+
+  .btn-gold {
+    @apply bg-accent text-white px-6 py-3 rounded-lg font-semibold font-body transition-all duration-300 hover:bg-accent-dark hover:shadow-gold hover:-translate-y-0.5;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-heading font-bold text-secondary;
+  }
+
+  .section-subtitle {
+    @apply text-lg font-body text-bvm-muted mt-3;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:-translate-y-2 hover:shadow-card-hover;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
+  }
+
+  .gold-shimmer {
+    background: linear-gradient(90deg, #D4A017 0%, #F0C040 50%, #D4A017 100%);
+    background-size: 200% auto;
+    animation: shimmer 2.5s linear infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .tricolor-strip {
+    background: linear-gradient(to right, #FF9933 33.33%, #FFFFFF 33.33%, #FFFFFF 66.66%, #138808 66.66%);
+  }
+
+  .rangoli-divider {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='20' viewBox='0 0 60 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 2l4 8h-8l4-8zm0 16l-4-8h8l-4 8z' fill='%23D4A017' fill-opacity='0.3'/%3E%3Ccircle cx='10' cy='10' r='2' fill='%23D4A017' fill-opacity='0.3'/%3E%3Ccircle cx='50' cy='10' r='2' fill='%23D4A017' fill-opacity='0.3'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    height: 20px;
+  }
+
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-sm border border-white/20 rounded-2xl;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: #C8531A; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #A03D10; }
+
+/* Ken Burns */
+.ken-burns-container { overflow: hidden; }
+.ken-burns-img {
+  animation: kenBurns 20s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+@keyframes kenBurns {
+  0% { transform: scale(1) translate(0, 0); }
+  100% { transform: scale(1.1) translate(-2%, -2%); }
+}
+
+/* Ticker */
+.ticker-wrap { overflow: hidden; white-space: nowrap; }
+.ticker-content { display: inline-block; animation: ticker 40s linear infinite; }
+@keyframes ticker {
+  0% { transform: translateX(100vw); }
+  100% { transform: translateX(-100%); }
+}
+
+/* Page transitions */
+.page-enter { opacity: 0; transform: translateY(16px); }
+.page-enter-active { opacity: 1; transform: translateY(0); transition: all 0.4s ease; }
+
+/* Flip card */
+.flip-card { perspective: 1000px; }
+.flip-card-inner { transition: transform 0.6s; transform-style: preserve-3d; position: relative; }
+.flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+.flip-card-front, .flip-card-back {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.flip-card-back { transform: rotateY(180deg); position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
