@@ -133,7 +133,7 @@ export default function HomePage() {
   return (
     <div className="bg-bvm-ivory">
       {/* ── HERO ── */}
-      <section className="relative min-h-screen flex items-center ken-burns-container">
+      <section className="relative min-h-screen hero-full-height flex items-center ken-burns-container">
         <div className="absolute inset-0 ken-burns-img">
           <img
             src="https://images.pexels.com/photos/1462630/pexels-photo-1462630.jpeg?auto=compress&cs=tinysrgb&w=1920"
@@ -384,18 +384,23 @@ export default function HomePage() {
               </motion.div>
             </AnimatePresence>
 
-            <div className="flex justify-center gap-3 mt-6">
-              <button onClick={prevTestimonial} className="w-10 h-10 rounded-full bg-white/10 hover:bg-accent text-white flex items-center justify-center transition-colors">
+            <div className="flex justify-center items-center gap-3 mt-6">
+              <button onClick={prevTestimonial} className="w-10 h-10 rounded-full bg-white/10 hover:bg-accent text-white flex items-center justify-center transition-colors" aria-label="Previous testimonial">
                 <ChevronLeft className="w-5 h-5" />
               </button>
               {TESTIMONIALS.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => setTestimonialIdx(i)}
-                  className={`w-2.5 h-2.5 rounded-full transition-colors ${i === testimonialIdx ? 'bg-accent' : 'bg-white/30'}`}
+                  aria-label={`Go to testimonial ${i + 1}`}
+                  className={`rounded-full transition-all duration-200 ${
+                    i === testimonialIdx
+                      ? 'w-6 h-6 bg-accent scale-100'
+                      : 'w-5 h-5 bg-white/30 hover:bg-white/60'
+                  }`}
                 />
               ))}
-              <button onClick={nextTestimonial} className="w-10 h-10 rounded-full bg-white/10 hover:bg-accent text-white flex items-center justify-center transition-colors">
+              <button onClick={nextTestimonial} className="w-10 h-10 rounded-full bg-white/10 hover:bg-accent text-white flex items-center justify-center transition-colors" aria-label="Next testimonial">
                 <ChevronRight className="w-5 h-5" />
               </button>
             </div>

@@ -151,7 +151,11 @@ export default function Navbar() {
               transition={{ duration: 0.3 }}
               className="lg:hidden overflow-hidden bg-white border-t border-gray-100"
             >
-              <div className="px-4 py-4 flex flex-col gap-1">
+              {/* Max height + scroll so it works on small phones */}
+              <div
+                className="px-4 py-4 flex flex-col gap-1 overflow-y-auto"
+                style={{ maxHeight: 'calc(100dvh - 120px)' }}
+              >
                 {navLinks.map((link) => (
                   <div key={link.path}>
                     <Link

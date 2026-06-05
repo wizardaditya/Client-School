@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Star } from 'lucide-react';
+import { Star, RotateCcw } from 'lucide-react';
 import { FACULTY_DATA } from '../data/schoolData';
 
 function Reveal({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
@@ -17,10 +17,15 @@ const DEPARTMENTS = ['All', 'Primary', 'Secondary', 'Senior Secondary', 'Sports'
 
 export default function FacultyPage() {
   const [activeDept, setActiveDept] = useState('All');
+  const [flippedId, setFlippedId] = useState<number | null>(null);
 
   const filtered = activeDept === 'All'
     ? FACULTY_DATA
     : FACULTY_DATA.filter((f) => f.department === activeDept);
+
+  const toggleFlip = (id: number) => {
+    setFlippedId((prev) => (prev === id ? null : id));
+  };
 
   return (
     <div className="bg-bvm-ivory">
@@ -39,8 +44,8 @@ export default function FacultyPage() {
         </div>
       </section>
 
-      {/* Filter Tabs */}
-      <section className="py-10 bg-white sticky top-[61px] z-30 shadow-sm">
+      {/* Filter Tabs — sticky-filter class adds -webkit-sticky for iOS */}
+      <section className="py-10 bg-white sticky-filter sticky top-[61px] z-30 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 flex gap-2 flex-wrap justify-center">
           {DEPARTMENTS.map((dept) => (
             <button
@@ -62,7 +67,17 @@ export default function FacultyPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filtered.map((faculty, i) => (
               <Reveal key={faculty.id} delay={i * 0.06}>
-                <div className="flip-card h-72 cursor-pointer" style={{ height: '320px' }}>
+                {/* Tap to flip on mobile, hover to flip on desktop */}
+                <div
+                  className={`flip-card cursor-pointer${flippedId === faculty.id ? ' flipped' : ''}`}
+                  style={{ height: '320px' }}
+                  onClick={() => toggleFlip(faculty.id)}
+                  role="button"
+                  aria-pressed={flippedId === faculty.id}
+                  aria-label={`${faculty.name} — tap to see bio`}
+                  tabIndex={0}
+                  onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && toggleFlip(faculty.id)}
+                >
                   <div className="flip-card-inner w-full h-full">
                     {/* Front */}
                     <div className="flip-card-front w-full h-full bg-white rounded-2xl shadow-card border border-gray-100 overflow-hidden">
@@ -89,6 +104,10 @@ export default function FacultyPage() {
                           <span className="text-xs font-body text-bvm-muted">{faculty.experience} exp.</span>
                         </div>
                         <div className="text-xs font-body text-bvm-muted">{faculty.qualification}</div>
+                        {/* Hint for touch users */}
+                        <div className="text-xs text-primary/60 font-body flex items-center gap-1 md:hidden">
+                          <RotateCcw className="w-3 h-3" /> Tap to see bio
+                        </div>
                       </div>
                     </div>
                     {/* Back */}

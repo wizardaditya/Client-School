@@ -69,7 +69,7 @@ export default function NewsPage() {
       </section>
 
       {/* Category Filter */}
-      <section className="py-8 bg-white shadow-sm sticky top-[61px] z-30">
+      <section className="py-8 bg-white shadow-sm sticky-filter sticky top-[61px] z-30">
         <div className="max-w-7xl mx-auto px-4 flex gap-2 flex-wrap justify-center">
           {CATEGORIES.map((cat) => (
             <button

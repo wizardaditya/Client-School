@@ -121,7 +121,7 @@ export default function StudentLifePage() {
               <Reveal key={i} delay={i * 0.08}>
                 <div className="bg-white rounded-2xl overflow-hidden shadow-card border border-gray-100 card-hover group">
                   <div className="relative overflow-hidden h-44">
-                    <img src={event.img} alt={event.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <img src={event.img} alt={event.name} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div className="absolute inset-0 bg-gradient-to-t from-secondary/70 to-transparent" />
                     <div className="absolute bottom-3 left-4">
                       <div className="font-heading font-bold text-white">{event.name}</div>
@@ -150,7 +150,7 @@ export default function StudentLifePage() {
               <Reveal key={i} delay={i * 0.1}>
                 <div className="text-center group">
                   <div className="relative overflow-hidden rounded-2xl mb-3 aspect-square">
-                    <img src={member.img} alt={member.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                    <img src={member.img} alt={member.name} loading="lazy" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                     <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/20 transition-colors duration-300" />
                   </div>
                   <div className="font-heading font-bold text-secondary text-sm">{member.name}</div>
@@ -177,7 +177,7 @@ export default function StudentLifePage() {
               <Reveal key={i} delay={i * 0.1}>
                 <div className="bg-white/10 backdrop-blur rounded-2xl p-5 text-center border border-white/20">
                   <div className="relative mx-auto w-16 h-16 mb-3">
-                    <img src={t.img} alt={t.name} className="w-full h-full rounded-full object-cover border-2 border-accent" />
+                    <img src={t.img} alt={t.name} loading="lazy" className="w-full h-full rounded-full object-cover border-2 border-accent" />
                     <div className="absolute -top-1 -right-1 w-6 h-6 bg-accent rounded-full flex items-center justify-center text-white text-xs font-bold">
                       {i + 1}
                     </div>
